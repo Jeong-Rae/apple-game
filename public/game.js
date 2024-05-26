@@ -255,7 +255,9 @@ function closeUsernameModal() {
  */
 async function getScoreBoard() {
     try {
-        const response = await fetch("http://localhost:3333/api/scoreboard");
+        const response = await fetch(
+            "http://ec2-13-125-76-129.ap-northeast-2.compute.amazonaws.com/api/scoreboard"
+        );
         if (!response.ok) {
             throw new Error(
                 "Network response was not ok " + response.statusText
@@ -269,13 +271,16 @@ async function getScoreBoard() {
 
 async function getRank(username, score) {
     try {
-        const response = await fetch("http://localhost:3333/api/rank", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, score }),
-        });
+        const response = await fetch(
+            "http://ec2-13-125-76-129.ap-northeast-2.compute.amazonaws.com/api/rank",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, score }),
+            }
+        );
         if (!response.ok) {
             throw new Error(
                 "Network response was not ok " + response.statusText
@@ -299,13 +304,16 @@ async function recordUserScore(username, score) {
     };
 
     try {
-        const response = await fetch("http://localhost:3333/api/scoreboard", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userScore),
-        });
+        const response = await fetch(
+            "http://ec2-13-125-76-129.ap-northeast-2.compute.amazonaws.com/api/scoreboard",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userScore),
+            }
+        );
         if (!response.ok) {
             throw new Error(
                 "Network response was not ok " + response.statusText
