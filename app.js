@@ -7,7 +7,7 @@ const port = 3333;
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
-let scoreBoard = [{ username: "JR", score: 1000 }];
+let scoreBoard = [];
 
 app.get("/api/scoreboard", (req, res) => {
     const topScores = scoreBoard.slice(0, 5);

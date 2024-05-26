@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document
         .getElementById("show-scoreboard-btn")
         .addEventListener("click", async function () {
-            scoreBoard = await getScoreBoard();
+            updateScoreboard(null, null);
             document
                 .getElementById("scoreboard-modal")
                 .classList.remove("hidden");
@@ -229,7 +229,7 @@ function checkForValidAreas() {
                         totalScore -= 300;
                         updateTotalScore();
 
-                        showUsernameModal();
+                        //showUsernameModal();
 
                         return;
                     }
@@ -255,9 +255,7 @@ function closeUsernameModal() {
  */
 async function getScoreBoard() {
     try {
-        const response = await fetch(
-            "http://ec2-13-125-76-129.ap-northeast-2.compute.amazonaws.com/api/scoreboard"
-        );
+        const response = await fetch("/api/scoreboard");
         if (!response.ok) {
             throw new Error(
                 "Network response was not ok " + response.statusText
@@ -271,16 +269,13 @@ async function getScoreBoard() {
 
 async function getRank(username, score) {
     try {
-        const response = await fetch(
-            "http://ec2-13-125-76-129.ap-northeast-2.compute.amazonaws.com/api/rank",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ username, score }),
-            }
-        );
+        const response = await fetch("/api/rank", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, score }),
+        });
         if (!response.ok) {
             throw new Error(
                 "Network response was not ok " + response.statusText
@@ -304,16 +299,13 @@ async function recordUserScore(username, score) {
     };
 
     try {
-        const response = await fetch(
-            "http://ec2-13-125-76-129.ap-northeast-2.compute.amazonaws.com/api/scoreboard",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(userScore),
-            }
-        );
+        const response = await fetch("/api/scoreboard", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userScore),
+        });
         if (!response.ok) {
             throw new Error(
                 "Network response was not ok " + response.statusText
@@ -350,7 +342,6 @@ async function updateScoreboard(latestUserScore, rankData) {
                     ? "bg-white dark:bg-gray-900"
                     : "bg-gray-100 dark:bg-gray-800";
 
-            console.log(rankData);
             if (rankData && rank === rankData.rank && rank <= 5) {
                 bgColorClass = "bg-yellow-100";
                 console.log(rankData, rank, bgColorClass);
