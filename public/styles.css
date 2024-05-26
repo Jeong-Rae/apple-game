@@ -1,0 +1,81 @@
+@font-face {
+    font-family: "S-CoreDream-3Light";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --background-color: #f0f0f0;
+    --control-background-color: #fff;
+    --control-border-color: #ccc;
+    --apple-background-color: #ffeb3b;
+    --apple-border-color: #ccc;
+    --apple-selected-start-color: #ff9800;
+    --apple-selected-end-color: #ff9800;
+    --apple-selected-color: #ffc107;
+    --apple-clicked-color: #ffc107;
+    --apple-clicked-shadow-color: #ff9800;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    background-color: var(--background-color);
+    font-family: "S-CoreDream-3Light", sans-serif;
+    color: #1a1a1a;
+}
+
+#controls {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 20px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#total-score {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#game-board {
+    display: grid;
+    gap: 5px;
+    background-color: var(--control-background-color);
+    border: 1px solid var(--control-border-color);
+}
+
+.apple {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--apple-background-color);
+    border: 1px solid var(--apple-border-color);
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.apple.selected-start,
+.apple.selected-end {
+    background-color: var(--apple-selected-start-color);
+}
+
+.apple.selected {
+    background-color: var(--apple-selected-color);
+}
+
+.apple.clicked {
+    background-color: var(--apple-clicked-color);
+    box-shadow: 0 0 5px var(--apple-clicked-shadow-color);
+}
